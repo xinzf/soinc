@@ -55,10 +55,10 @@
     "namespace": "soinc",
     "name": "soinc",
     "description": "",
-    "author": "",
+    "author": "Xiang Zhi",
     "version": "0.0.1",
     "verbose": false,
     "requires": {
-        "extensions": []
+        "extensions": ["phalcon"]
     }
 }

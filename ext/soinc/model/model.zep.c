@@ -17,6 +17,7 @@
 #include "kernel/array.h"
 #include "kernel/object.h"
 #include "kernel/operators.h"
+#include "kernel/string.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/exception.h"
 
@@ -113,7 +114,7 @@ PHP_METHOD(Soinc_Model_Model, getFirstMessage) {
 		zephir_check_temp_parameter(_3$$3);
 		zephir_check_call_status();
 		ZEPHIR_MAKE_REF(_2$$3);
-		ZEPHIR_CALL_FUNCTION(&_4$$3, "current", NULL, 33, _2$$3);
+		ZEPHIR_CALL_FUNCTION(&_4$$3, "current", NULL, 38, _2$$3);
 		ZEPHIR_UNREF(_2$$3);
 		zephir_check_call_status();
 		zephir_get_strval(_5$$3, _4$$3);
@@ -143,13 +144,39 @@ PHP_METHOD(Soinc_Model_Model, getLastMessage) {
 		zephir_check_temp_parameter(_3$$3);
 		zephir_check_call_status();
 		ZEPHIR_MAKE_REF(_2$$3);
-		ZEPHIR_CALL_FUNCTION(&_4$$3, "end", NULL, 29, _2$$3);
+		ZEPHIR_CALL_FUNCTION(&_4$$3, "end", NULL, 34, _2$$3);
 		ZEPHIR_UNREF(_2$$3);
 		zephir_check_call_status();
 		zephir_get_strval(_5$$3, _4$$3);
 		RETURN_CTOR(_5$$3);
 	}
 	RETURN_MM_BOOL(0);
+
+}
+
+PHP_METHOD(Soinc_Model_Model, getErrCode) {
+
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *sqlErr, *matches = NULL, *result = NULL, _0;
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &sqlErr);
+
+
+
+	ZEPHIR_SINIT_VAR(_0);
+	ZVAL_STRING(&_0, "/[(\\w+)]/", 0);
+	ZEPHIR_INIT_VAR(result);
+	zephir_preg_match(result, &_0, sqlErr, matches, 1, 0 , 0  TSRMLS_CC);
+	if (zephir_is_true(result)) {
+		ZEPHIR_MAKE_REF(result);
+		ZEPHIR_RETURN_CALL_FUNCTION("reset", NULL, 15, result);
+		ZEPHIR_UNREF(result);
+		zephir_check_call_status();
+		RETURN_MM();
+	} else {
+		RETURN_MM_LONG(0);
+	}
 
 }
 
@@ -229,7 +256,7 @@ PHP_METHOD(Soinc_Model_Model, beforeValidationOnCreate) {
 
 	ZEPHIR_SINIT_VAR(_0);
 	ZVAL_STRING(&_0, "Y-m-d H:i:s", 0);
-	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 28, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 33, &_0);
 	zephir_check_call_status();
 	zephir_update_property_this(this_ptr, SL("created"), _1 TSRMLS_CC);
 	_2 = zephir_fetch_nproperty_this(this_ptr, SL("created"), PH_NOISY_CC);
@@ -254,7 +281,7 @@ PHP_METHOD(Soinc_Model_Model, beforeSave) {
 
 	ZEPHIR_SINIT_VAR(_0);
 	ZVAL_STRING(&_0, "Y-m-d H:i:s", 0);
-	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 28, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 33, &_0);
 	zephir_check_call_status();
 	zephir_update_property_this(this_ptr, SL("updated"), _1 TSRMLS_CC);
 	RETURN_MM_BOOL(1);

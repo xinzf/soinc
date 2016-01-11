@@ -36,16 +36,19 @@ ZEPHIR_INIT_CLASS(Soinc_Exception) {
 PHP_METHOD(Soinc_Exception, __construct) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *message = NULL, *logger = NULL, *_0$$3, *_1$$4 = NULL, *_2;
+	zval *message = NULL, *code = NULL, *logger = NULL, *_0$$3, *_1$$4 = NULL, *_2;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &message, &logger);
+	zephir_fetch_params(1, 0, 3, &message, &code, &logger);
 
 	if (!message) {
 		ZEPHIR_INIT_VAR(message);
 		ZVAL_STRING(message, "", 1);
 	} else {
 		ZEPHIR_SEPARATE_PARAM(message);
+	}
+	if (!code) {
+		code = ZEPHIR_GLOBAL(global_null);
 	}
 	if (!logger) {
 		logger = ZEPHIR_GLOBAL(global_null);
@@ -67,6 +70,9 @@ PHP_METHOD(Soinc_Exception, __construct) {
 	_2 = zephir_fetch_nproperty_this(this_ptr, SL("message"), PH_NOISY_CC);
 	if (ZEPHIR_IS_EMPTY(_2)) {
 		zephir_update_property_this(this_ptr, SL("message"), message TSRMLS_CC);
+	}
+	if (!(Z_TYPE_P(code) == IS_NULL)) {
+		zephir_update_property_this(this_ptr, SL("code"), code TSRMLS_CC);
 	}
 	ZEPHIR_MM_RESTORE();
 

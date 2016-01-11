@@ -6,7 +6,7 @@ class Exception extends \Exception
     protected level = \Phalcon\Logger::ERROR;
     protected code = 0;
 
-    public function __construct(var message = "", <\Phalcon\Logger\Adapter> logger = null)
+    public function __construct(var message = "", var code = null, <\Phalcon\Logger\Adapter> logger = null)
     {
         if empty message {
             let message = "An exception created: " . get_called_class();
@@ -18,6 +18,10 @@ class Exception extends \Exception
 
         if empty this->message {
             let this->message = message;
+        }
+
+        if !is_null(code) {
+            let this->code = code;
         }
     }
 

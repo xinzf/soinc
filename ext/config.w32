@@ -11,12 +11,16 @@ if (PHP_SOINC != "no") {
     AC_DEFINE("ZEPHIR_USE_PHP_JSON", 1, "Whether PHP json extension is present at compile time");
   }
   
-  ADD_SOURCES(configure_module_dirname + "/soinc/logger/processor", "abstractprocessor.zep.c trace.zep.c", "soinc");
-	ADD_SOURCES(configure_module_dirname + "/soinc", "abstractmodule.zep.c bootstrap.zep.c exception.zep.c tools.zep.c", "soinc");
+  ADD_SOURCES(configure_module_dirname + "/soinc", "exception.zep.c abstractmodule.zep.c bootstrap.zep.c tools.zep.c", "soinc");
+	ADD_SOURCES(configure_module_dirname + "/soinc/logger/processor", "abstractprocessor.zep.c trace.zep.c", "soinc");
 	ADD_SOURCES(configure_module_dirname + "/soinc/db", "mysql.zep.c", "soinc");
+	ADD_SOURCES(configure_module_dirname + "/soinc/exception", "db.zep.c", "soinc");
 	ADD_SOURCES(configure_module_dirname + "/soinc/http/curl", "extended.zep.c", "soinc");
 	ADD_SOURCES(configure_module_dirname + "/soinc/http/request", "extended.zep.c", "soinc");
+	ADD_SOURCES(configure_module_dirname + "/soinc/http/response", "cookies.zep.c", "soinc");
+	ADD_SOURCES(configure_module_dirname + "/soinc/logger/adapter", "file.zep.c", "soinc");
 	ADD_SOURCES(configure_module_dirname + "/soinc/logger/formatter", "line.zep.c", "soinc");
 	ADD_SOURCES(configure_module_dirname + "/soinc/model", "model.zep.c", "soinc");
+	ADD_SOURCES(configure_module_dirname + "/soinc/worker", "taskabstract.zep.c worker.zep.c", "soinc");
   ADD_FLAG("CFLAGS_SOINC", "/D ZEPHIR_RELEASE");
 }

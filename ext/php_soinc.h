@@ -13,7 +13,7 @@
 #define PHP_SOINC_NAME        "soinc"
 #define PHP_SOINC_VERSION     "0.0.1"
 #define PHP_SOINC_EXTNAME     "soinc"
-#define PHP_SOINC_AUTHOR      ""
+#define PHP_SOINC_AUTHOR      "Xiang Zhi"
 #define PHP_SOINC_ZEPVERSION  "0.9.1a-dev"
 #define PHP_SOINC_DESCRIPTION ""
 

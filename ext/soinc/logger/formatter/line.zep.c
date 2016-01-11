@@ -99,7 +99,7 @@ PHP_METHOD(Soinc_Logger_Formatter_Line, format) {
 	zephir_update_property_array(this_ptr, SL("processors"), _0, message TSRMLS_CC);
 	ZEPHIR_SINIT_VAR(_1);
 	ZVAL_STRING(&_1, "Y-m-d H:i:s", 0);
-	ZEPHIR_CALL_FUNCTION(&_2, "date", NULL, 28, &_1, date);
+	ZEPHIR_CALL_FUNCTION(&_2, "date", NULL, 33, &_1, date);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_3);
 	ZVAL_STRING(_3, "date", 1);
@@ -122,18 +122,18 @@ PHP_METHOD(Soinc_Logger_Formatter_Line, format) {
 		_7$$3 = zephir_fetch_nproperty_this(this_ptr, SL("formatString"), PH_NOISY_CC);
 		ZEPHIR_INIT_VAR(_8$$3);
 		ZEPHIR_CONCAT_SV(_8$$3, "Logger format is not valid: ", _7$$3);
-		ZEPHIR_CALL_METHOD(NULL, _6$$3, "__construct", NULL, 5, _8$$3);
+		ZEPHIR_CALL_METHOD(NULL, _6$$3, "__construct", NULL, 6, _8$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(_6$$3, "soinc/logger/formatter/line.zep", 29 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	ZEPHIR_MAKE_REF(matches);
-	ZEPHIR_CALL_FUNCTION(&replace0, "reset", NULL, 14, matches);
+	ZEPHIR_CALL_FUNCTION(&replace0, "reset", NULL, 15, matches);
 	ZEPHIR_UNREF(matches);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(matches);
-	ZEPHIR_CALL_FUNCTION(&replace1, "end", NULL, 29, matches);
+	ZEPHIR_CALL_FUNCTION(&replace1, "end", NULL, 34, matches);
 	ZEPHIR_UNREF(matches);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(processors);
@@ -147,7 +147,7 @@ PHP_METHOD(Soinc_Logger_Formatter_Line, format) {
 		ZEPHIR_OBS_NVAR(val2);
 		_12$$4 = zephir_fetch_nproperty_this(this_ptr, SL("processors"), PH_NOISY_CC);
 		if (zephir_array_isset_fetch(&val2, _12$$4, val1, 0 TSRMLS_CC)) {
-			ZEPHIR_CALL_FUNCTION(&_13$$5, "strval", &_14, 30, val2);
+			ZEPHIR_CALL_FUNCTION(&_13$$5, "strval", &_14, 35, val2);
 			zephir_check_call_status();
 			zephir_array_update_zval(&processors, val1, &_13$$5, PH_COPY | PH_SEPARATE);
 		} else {
@@ -156,7 +156,7 @@ PHP_METHOD(Soinc_Logger_Formatter_Line, format) {
 			zephir_array_update_zval(&processors, val1, &_15$$6, PH_COPY | PH_SEPARATE);
 		}
 	}
-	ZEPHIR_CALL_FUNCTION(&_2, "array_values", NULL, 11, processors);
+	ZEPHIR_CALL_FUNCTION(&_2, "array_values", NULL, 12, processors);
 	zephir_check_call_status();
 	_16 = zephir_fetch_nproperty_this(this_ptr, SL("formatString"), PH_NOISY_CC);
 	ZEPHIR_INIT_VAR(logStr);

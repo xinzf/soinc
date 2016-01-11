@@ -1,12 +1,16 @@
 //<?php
 namespace Soinc;
 
+// if !class_exists("\Phalcon\Loader",false) {
+    // error_log("Soinc must requied Phalcon Framework!");
+    // exit();
+// }
+
 /**
 * Bootsrap
 */
 final class Bootstrap
 {
-
     const CONFIG_DIR_NAME = "config";
 
     protected config;
@@ -20,7 +24,6 @@ final class Bootstrap
     protected modeMap = [
         "Web"     : "Web",
         "Cli"     : "Task",
-        "Srv"     : "Srv",
         "Micro"   : "Micro"
     ];
 
@@ -154,7 +157,7 @@ final class Bootstrap
         let this->di = new \Phalcon\DI\FactoryDefault();
         let app = new \Phalcon\Mvc\Micro();
         let {"app"} = app;
-        let handleFiles = glob(this->appPath."handlers/*.php");
+        let handleFiles = array_merge(glob(this->appPath."handlers/*.php"),glob(this->appPath."handlers/*/*.php"));
 
         try {
             app->setDI(this->di);
@@ -177,44 +180,6 @@ final class Bootstrap
         }
     }
 
-    public function execSrv (var arg = null) {
-
-        if ! this->config->has("services_path") {
-
-        }
-
-        if ! this->config->has("thriftRpc_path") {
-
-        }
-
-        if ! this->config->has("thrift_services") {
-
-        }
-
-        // var console;
-        let this->di = new \Phalcon\DI\FactoryDefault\CLI();
-        // let console = new \Phalcon\ClI\Console();
-        // console->setDI(this->di);
-
-        this->initBaseService();
-        this->loaderModule();
-
-        $configs = $this->config->thrift_services->toArray();
-        for name, setting in configs {
-            if !is_dir(rtrim(this->config->services_path,"/")."/".name) {
-                continue;
-            }
-
-            let Worker = new \ThriftWorker(setting["addr"]);
-            let Worker->thriftRoot = this->config->services_path;
-            let Worker->count = setting["num"];
-            let Worker->class = name;
-        }
-
-        \Workerman\Worker::funAll();
-
-    }
-
     public function getDI() -> <\Phalcon\DI>
     {
         return this->di;
@@ -233,6 +198,11 @@ final class Bootstrap
     public function getAppPath() -> string
     {
         return this->appPath;
+    }
+
+    public function getLoader() -> <\Phalcon\Loader>
+    {
+        return this->loader;
     }
 
     public function load(var filePath)
@@ -258,16 +228,17 @@ final class Bootstrap
         }
 
         module->setBootstrap(this);
-        let dirs = module->registerDirs();
+        let dirs       = module->registerDirs();
         let namespaces = module->registerNamespaces();
-        let services = module->registerServices();
 
-        this->loader->registerDirs(dirs,true)->register();
+        this->loader->registerDirs(dirs,true);
         this->loader->registerNamespaces(namespaces,true);
+        this->loader->register();
 
+        let services   = module->registerServices();
         var name,obj;
         for name,obj in services {
-            this->di->set(name,obj);
+            this->di->setShared(name,obj);
         }
     }
 }

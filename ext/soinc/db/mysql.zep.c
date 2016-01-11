@@ -81,7 +81,7 @@ PHP_METHOD(Soinc_Db_Mysql, __construct) {
 	ZEPHIR_CALL_METHOD(&config, _4, "toarray", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(config);
-	ZEPHIR_CALL_FUNCTION(&_5, "reset", NULL, 14, config);
+	ZEPHIR_CALL_FUNCTION(&_5, "reset", NULL, 15, config);
 	ZEPHIR_UNREF(config);
 	zephir_check_call_status();
 	if (!(Z_TYPE_P(_5) == IS_ARRAY)) {
@@ -93,7 +93,7 @@ PHP_METHOD(Soinc_Db_Mysql, __construct) {
 		zephir_update_property_this(this_ptr, SL("dbConfigs"), config TSRMLS_CC);
 	}
 	_7 = zephir_fetch_nproperty_this(this_ptr, SL("dbConfigs"), PH_NOISY_CC);
-	zephir_is_iterable(_7, &_9, &_8, 0, 0, "soinc/db/mysql.zep", 39);
+	zephir_is_iterable(_7, &_9, &_8, 0, 0, "soinc/db/mysql.zep", 38);
 	for (
 	  ; zephir_hash_get_current_data_ex(_9, (void**) &_10, &_8) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_9, &_8)
@@ -103,28 +103,28 @@ PHP_METHOD(Soinc_Db_Mysql, __construct) {
 		ZEPHIR_INIT_NVAR(_11$$5);
 		zephir_create_array(_11$$5, 6, 0 TSRMLS_CC);
 		ZEPHIR_OBS_NVAR(_12$$5);
-		zephir_array_fetch_string(&_12$$5, config, SL("host"), PH_NOISY, "soinc/db/mysql.zep", 27 TSRMLS_CC);
+		zephir_array_fetch_string(&_12$$5, config, SL("host"), PH_NOISY, "soinc/db/mysql.zep", 26 TSRMLS_CC);
 		zephir_array_update_string(&_11$$5, SL("host"), &_12$$5, PH_COPY | PH_SEPARATE);
 		ZEPHIR_OBS_NVAR(_12$$5);
-		zephir_array_fetch_string(&_12$$5, config, SL("port"), PH_NOISY, "soinc/db/mysql.zep", 28 TSRMLS_CC);
+		zephir_array_fetch_string(&_12$$5, config, SL("port"), PH_NOISY, "soinc/db/mysql.zep", 27 TSRMLS_CC);
 		zephir_array_update_string(&_11$$5, SL("port"), &_12$$5, PH_COPY | PH_SEPARATE);
 		ZEPHIR_OBS_NVAR(_12$$5);
-		zephir_array_fetch_string(&_12$$5, config, SL("username"), PH_NOISY, "soinc/db/mysql.zep", 29 TSRMLS_CC);
+		zephir_array_fetch_string(&_12$$5, config, SL("username"), PH_NOISY, "soinc/db/mysql.zep", 28 TSRMLS_CC);
 		zephir_array_update_string(&_11$$5, SL("username"), &_12$$5, PH_COPY | PH_SEPARATE);
 		ZEPHIR_OBS_NVAR(_12$$5);
-		zephir_array_fetch_string(&_12$$5, config, SL("password"), PH_NOISY, "soinc/db/mysql.zep", 30 TSRMLS_CC);
+		zephir_array_fetch_string(&_12$$5, config, SL("password"), PH_NOISY, "soinc/db/mysql.zep", 29 TSRMLS_CC);
 		zephir_array_update_string(&_11$$5, SL("password"), &_12$$5, PH_COPY | PH_SEPARATE);
 		ZEPHIR_OBS_NVAR(_12$$5);
-		zephir_array_fetch_string(&_12$$5, config, SL("dbname"), PH_NOISY, "soinc/db/mysql.zep", 31 TSRMLS_CC);
+		zephir_array_fetch_string(&_12$$5, config, SL("dbname"), PH_NOISY, "soinc/db/mysql.zep", 30 TSRMLS_CC);
 		zephir_array_update_string(&_11$$5, SL("dbname"), &_12$$5, PH_COPY | PH_SEPARATE);
 		ZEPHIR_INIT_NVAR(_13$$5);
 		zephir_create_array(_13$$5, 3, 0 TSRMLS_CC);
-		zephir_array_fetch_string(&_14$$5, config, SL("charset"), PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 33 TSRMLS_CC);
+		zephir_array_fetch_string(&_14$$5, config, SL("charset"), PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 32 TSRMLS_CC);
 		ZEPHIR_INIT_LNVAR(_15$$5);
 		ZEPHIR_CONCAT_SV(_15$$5, "SET NAMES ", _14$$5);
 		zephir_array_update_long(&_13$$5, 1002, &_15$$5, PH_COPY ZEPHIR_DEBUG_PARAMS_DUMMY);
 		ZEPHIR_OBS_NVAR(_12$$5);
-		zephir_array_fetch_string(&_12$$5, config, SL("timeout"), PH_NOISY, "soinc/db/mysql.zep", 34 TSRMLS_CC);
+		zephir_array_fetch_string(&_12$$5, config, SL("timeout"), PH_NOISY, "soinc/db/mysql.zep", 33 TSRMLS_CC);
 		zephir_array_update_long(&_13$$5, 2, &_12$$5, PH_COPY ZEPHIR_DEBUG_PARAMS_DUMMY);
 		add_index_long(_13$$5, 3, 2);
 		zephir_array_update_string(&_11$$5, SL("options"), &_13$$5, PH_COPY | PH_SEPARATE);
@@ -149,7 +149,7 @@ PHP_METHOD(Soinc_Db_Mysql, getConnection) {
 		}
 		_1$$3 = zephir_fetch_nproperty_this(this_ptr, SL("dbConfigs"), PH_NOISY_CC);
 		ZEPHIR_MAKE_REF(_1$$3);
-		ZEPHIR_CALL_FUNCTION(NULL, "shuffle", &_2, 15, _1$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "shuffle", &_2, 16, _1$$3);
 		ZEPHIR_UNREF(_1$$3);
 		zephir_check_call_status();
 
@@ -158,7 +158,7 @@ PHP_METHOD(Soinc_Db_Mysql, getConnection) {
 			ZEPHIR_INIT_NVAR(_3$$4);
 			object_init_ex(_3$$4, zephir_get_internal_ce(SS("phalcon\\db\\adapter\\pdo\\mysql") TSRMLS_CC));
 			_4$$4 = zephir_fetch_nproperty_this(this_ptr, SL("dbConfigs"), PH_NOISY_CC);
-			zephir_array_fetch_long(&_5$$4, _4$$4, 0, PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 48 TSRMLS_CC);
+			zephir_array_fetch_long(&_5$$4, _4$$4, 0, PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 47 TSRMLS_CC);
 			ZEPHIR_CALL_METHOD(NULL, _3$$4, "__construct", &_6, 0, _5$$4);
 			zephir_check_call_status_or_jump(try_end_1);
 			zephir_update_property_this(this_ptr, SL("connection"), _3$$4 TSRMLS_CC);
@@ -175,14 +175,14 @@ PHP_METHOD(Soinc_Db_Mysql, getConnection) {
 			if (zephir_instance_of_ev(e$$3, zend_exception_get_default(TSRMLS_C) TSRMLS_CC)) {
 				zend_clear_exception(TSRMLS_C);
 				_7$$5 = zephir_fetch_nproperty_this(this_ptr, SL("dbConfigs"), PH_NOISY_CC);
-				zephir_array_fetch_long(&_8$$5, _7$$5, 0, PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 51 TSRMLS_CC);
-				zephir_array_fetch_string(&_9$$5, _8$$5, SL("host"), PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 51 TSRMLS_CC);
+				zephir_array_fetch_long(&_8$$5, _7$$5, 0, PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 50 TSRMLS_CC);
+				zephir_array_fetch_string(&_9$$5, _8$$5, SL("host"), PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 50 TSRMLS_CC);
 				_10$$5 = zephir_fetch_nproperty_this(this_ptr, SL("dbConfigs"), PH_NOISY_CC);
-				zephir_array_fetch_long(&_11$$5, _10$$5, 0, PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 51 TSRMLS_CC);
-				zephir_array_fetch_string(&_12$$5, _11$$5, SL("username"), PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 51 TSRMLS_CC);
+				zephir_array_fetch_long(&_11$$5, _10$$5, 0, PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 50 TSRMLS_CC);
+				zephir_array_fetch_string(&_12$$5, _11$$5, SL("username"), PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 50 TSRMLS_CC);
 				ZEPHIR_INIT_LNVAR(_13$$5);
 				ZEPHIR_CONCAT_SVSV(_13$$5, "PHP Fatal error:  Soinc::Db::MySQL::connect() failed to connect to MySQL. Detail: hostname is ", _9$$5, " the user is ", _12$$5);
-				ZEPHIR_CALL_FUNCTION(NULL, "error_log", &_14, 16, _13$$5);
+				ZEPHIR_CALL_FUNCTION(NULL, "error_log", &_14, 17, _13$$5);
 				zephir_check_call_status();
 				_15$$5 = zephir_fetch_nproperty_this(this_ptr, SL("dbConfigs"), PH_NOISY_CC);
 				zephir_array_unset_long(&_15$$5, 0, PH_SEPARATE);
@@ -190,7 +190,7 @@ PHP_METHOD(Soinc_Db_Mysql, getConnection) {
 				ZEPHIR_INIT_NVAR(dbNum$$3);
 				ZVAL_LONG(dbNum$$3, zephir_fast_count_int(_16$$5 TSRMLS_CC));
 				if (ZEPHIR_LT_LONG(dbNum$$3, 1)) {
-					zephir_throw_exception_debug(e$$3, "soinc/db/mysql.zep", 55 TSRMLS_CC);
+					zephir_throw_exception_debug(e$$3, "soinc/db/mysql.zep", 54 TSRMLS_CC);
 					ZEPHIR_MM_RESTORE();
 					return;
 				}

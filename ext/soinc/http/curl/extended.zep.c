@@ -152,7 +152,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, close) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
 	if (Z_TYPE_P(_0) == IS_RESOURCE) {
 		_1$$3 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_close", NULL, 17, _1$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_close", NULL, 18, _1$$3);
 		zephir_check_call_status();
 		zephir_update_property_this(this_ptr, SL("handle"), ZEPHIR_GLOBAL(global_null) TSRMLS_CC);
 		zephir_update_property_this(this_ptr, SL("url"), ZEPHIR_GLOBAL(global_null) TSRMLS_CC);
@@ -211,7 +211,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, setPort) {
 
 	ZEPHIR_SINIT_VAR(_0);
 	ZVAL_LONG(&_0, port);
-	ZEPHIR_CALL_FUNCTION(&_1, "is_integer", NULL, 18, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "is_integer", NULL, 19, &_0);
 	zephir_check_call_status();
 	if (!(zephir_is_true(_1))) {
 		ZEPHIR_INIT_VAR(_2$$3);
@@ -220,7 +220,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, setPort) {
 		ZVAL_STRING(_3$$3, "http port in not ingeter", ZEPHIR_TEMP_PARAM_COPY);
 		ZEPHIR_INIT_VAR(_4$$3);
 		ZVAL_LONG(_4$$3, 1);
-		ZEPHIR_CALL_METHOD(NULL, _2$$3, "__construct", NULL, 5, _3$$3, _4$$3);
+		ZEPHIR_CALL_METHOD(NULL, _2$$3, "__construct", NULL, 6, _3$$3, _4$$3);
 		zephir_check_temp_parameter(_3$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(_2$$3, "soinc/http/curl/extended.zep", 133 TSRMLS_CC);
@@ -245,7 +245,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, setPostData) {
 
 
 	if (Z_TYPE_P(postdata) == IS_ARRAY) {
-		ZEPHIR_CALL_FUNCTION(&_0$$3, "http_build_query", NULL, 19, postdata);
+		ZEPHIR_CALL_FUNCTION(&_0$$3, "http_build_query", NULL, 20, postdata);
 		zephir_check_call_status();
 		zephir_update_property_this(this_ptr, SL("postdata"), _0$$3 TSRMLS_CC);
 	} else {
@@ -378,12 +378,12 @@ PHP_METHOD(Soinc_Http_Curl_Extended, send) {
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "close", &_0, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_1, "curl_init", NULL, 20);
+	ZEPHIR_CALL_FUNCTION(&_1, "curl_init", NULL, 21);
 	zephir_check_call_status();
 	zephir_update_property_this(this_ptr, SL("handle"), _1 TSRMLS_CC);
 	_2 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
 	_3 = zephir_fetch_nproperty_this(this_ptr, SL("defaultOptions"), PH_NOISY_CC);
-	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt_array", NULL, 21, _2, _3);
+	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt_array", NULL, 22, _2, _3);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(headers);
 	array_init(headers);
@@ -406,12 +406,12 @@ PHP_METHOD(Soinc_Http_Curl_Extended, send) {
 	_11 = zephir_fetch_nproperty_this(this_ptr, SL("url"), PH_NOISY_CC);
 	ZEPHIR_SINIT_VAR(_12);
 	ZVAL_LONG(&_12, 10002);
-	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 22, _10, &_12, _11);
+	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 23, _10, &_12, _11);
 	zephir_check_call_status();
 	_14 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
 	ZEPHIR_SINIT_NVAR(_12);
 	ZVAL_LONG(&_12, 10023);
-	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 22, _14, &_12, headers);
+	ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 23, _14, &_12, headers);
 	zephir_check_call_status();
 	_15 = zephir_fetch_nproperty_this(this_ptr, SL("user_agent"), PH_NOISY_CC);
 	if (zephir_is_true(_15)) {
@@ -419,7 +419,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, send) {
 		_17$$4 = zephir_fetch_nproperty_this(this_ptr, SL("user_agent"), PH_NOISY_CC);
 		ZEPHIR_SINIT_VAR(_18$$4);
 		ZVAL_LONG(&_18$$4, 10018);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 22, _16$$4, &_18$$4, _17$$4);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 23, _16$$4, &_18$$4, _17$$4);
 		zephir_check_call_status();
 	}
 	ZEPHIR_OBS_VAR(_19);
@@ -428,7 +428,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, send) {
 		_20$$5 = zephir_fetch_nproperty_this(this_ptr, SL("postdata"), PH_NOISY_CC);
 		if (Z_TYPE_P(_20$$5) == IS_ARRAY) {
 			_21$$6 = zephir_fetch_nproperty_this(this_ptr, SL("postdata"), PH_NOISY_CC);
-			ZEPHIR_CALL_FUNCTION(&_22$$6, "http_build_query", NULL, 19, _21$$6);
+			ZEPHIR_CALL_FUNCTION(&_22$$6, "http_build_query", NULL, 20, _21$$6);
 			zephir_check_call_status();
 			zephir_update_property_this(this_ptr, SL("postdata"), _22$$6 TSRMLS_CC);
 		}
@@ -436,12 +436,12 @@ PHP_METHOD(Soinc_Http_Curl_Extended, send) {
 		_24$$5 = zephir_fetch_nproperty_this(this_ptr, SL("postdata"), PH_NOISY_CC);
 		ZEPHIR_SINIT_VAR(_25$$5);
 		ZVAL_LONG(&_25$$5, 10015);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 22, _23$$5, &_25$$5, _24$$5);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 23, _23$$5, &_25$$5, _24$$5);
 		zephir_check_call_status();
 		_26$$5 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
 		ZEPHIR_SINIT_NVAR(_25$$5);
 		ZVAL_LONG(&_25$$5, 47);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 22, _26$$5, &_25$$5, ZEPHIR_GLOBAL(global_true));
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 23, _26$$5, &_25$$5, ZEPHIR_GLOBAL(global_true));
 		zephir_check_call_status();
 	}
 	_27 = zephir_fetch_nproperty_this(this_ptr, SL("port"), PH_NOISY_CC);
@@ -450,7 +450,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, send) {
 		_29$$7 = zephir_fetch_nproperty_this(this_ptr, SL("port"), PH_NOISY_CC);
 		ZEPHIR_SINIT_VAR(_30$$7);
 		ZVAL_LONG(&_30$$7, 3);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 22, _28$$7, &_30$$7, _29$$7);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 23, _28$$7, &_30$$7, _29$$7);
 		zephir_check_call_status();
 	}
 	ZEPHIR_OBS_VAR(_31);
@@ -460,13 +460,13 @@ PHP_METHOD(Soinc_Http_Curl_Extended, send) {
 		_33$$8 = zephir_fetch_nproperty_this(this_ptr, SL("cookie"), PH_NOISY_CC);
 		ZEPHIR_SINIT_VAR(_34$$8);
 		ZVAL_LONG(&_34$$8, 10082);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 22, _32$$8, &_34$$8, _33$$8);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 23, _32$$8, &_34$$8, _33$$8);
 		zephir_check_call_status();
 		_35$$8 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
 		_36$$8 = zephir_fetch_nproperty_this(this_ptr, SL("cookie"), PH_NOISY_CC);
 		ZEPHIR_SINIT_NVAR(_34$$8);
 		ZVAL_LONG(&_34$$8, 10031);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 22, _35$$8, &_34$$8, _36$$8);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 23, _35$$8, &_34$$8, _36$$8);
 		zephir_check_call_status();
 	}
 	ZEPHIR_OBS_VAR(_37);
@@ -476,20 +476,20 @@ PHP_METHOD(Soinc_Http_Curl_Extended, send) {
 		_39$$9 = zephir_fetch_nproperty_this(this_ptr, SL("referer"), PH_NOISY_CC);
 		ZEPHIR_SINIT_VAR(_40$$9);
 		ZVAL_LONG(&_40$$9, 10016);
-		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 22, _38$$9, &_40$$9, _39$$9);
+		ZEPHIR_CALL_FUNCTION(NULL, "curl_setopt", &_13, 23, _38$$9, &_40$$9, _39$$9);
 		zephir_check_call_status();
 	}
 	_41 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
-	ZEPHIR_CALL_FUNCTION(&response, "curl_exec", NULL, 23, _41);
+	ZEPHIR_CALL_FUNCTION(&response, "curl_exec", NULL, 24, _41);
 	zephir_check_call_status();
 	_42 = zephir_fetch_nproperty_this(this_ptr, SL("url"), PH_NOISY_CC);
 	zephir_update_property_this(this_ptr, SL("lastRequest"), _42 TSRMLS_CC);
 	_43 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
-	ZEPHIR_CALL_FUNCTION(&errcode, "curl_errno", NULL, 24, _43);
+	ZEPHIR_CALL_FUNCTION(&errcode, "curl_errno", NULL, 25, _43);
 	zephir_check_call_status();
 	if (!ZEPHIR_IS_LONG(errcode, 0)) {
 		_44$$10 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
-		ZEPHIR_CALL_FUNCTION(&_45$$10, "curl_error", NULL, 25, _44$$10);
+		ZEPHIR_CALL_FUNCTION(&_45$$10, "curl_error", NULL, 26, _44$$10);
 		zephir_check_call_status();
 		zephir_update_property_this(this_ptr, SL("error"), _45$$10 TSRMLS_CC);
 		RETURN_MM_BOOL(0);
@@ -505,7 +505,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, send) {
 	_47 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
 	ZEPHIR_SINIT_NVAR(_12);
 	ZVAL_LONG(&_12, 2097154);
-	ZEPHIR_CALL_FUNCTION(&httpCode, "curl_getinfo", NULL, 26, _47, &_12);
+	ZEPHIR_CALL_FUNCTION(&httpCode, "curl_getinfo", NULL, 27, _47, &_12);
 	zephir_check_call_status();
 	if (!(zephir_fast_in_array(httpCode, codes TSRMLS_CC))) {
 		ZEPHIR_INIT_VAR(_48$$11);
@@ -521,7 +521,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, send) {
 		zephir_update_property_this(this_ptr, SL("error"), _48$$11 TSRMLS_CC);
 		RETURN_MM_BOOL(0);
 	}
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "parseresponse", NULL, 27, response);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "parseresponse", NULL, 28, response);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "close", &_0, 0);
 	zephir_check_call_status();
@@ -546,7 +546,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, parseResponse) {
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("handle"), PH_NOISY_CC);
 	ZEPHIR_SINIT_VAR(_1);
 	ZVAL_LONG(&_1, 2097163);
-	ZEPHIR_CALL_FUNCTION(&header_size, "curl_getinfo", NULL, 26, _0, &_1);
+	ZEPHIR_CALL_FUNCTION(&header_size, "curl_getinfo", NULL, 27, _0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_SINIT_NVAR(_1);
 	ZVAL_LONG(&_1, 0);

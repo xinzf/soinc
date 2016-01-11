@@ -2,18 +2,17 @@ namespace Soinc\Db;
 
 class Mysql
 {
-    private dbConfigs = [];
+    private dbConfigs  = [];
     private name;
     private connection = null;
-    private connected = false;
+    private connected  = false;
 
     public function __construct(string! name)
     {
-        let this->name = name;
-
         var config, _index;
-        let config = \Phalcon\DI::getDefault()->get("config");
-        let config = config->mysql->{name}->toArray();
+        let this->name = name;
+        let config     = \Phalcon\DI::getDefault()->get("config");
+        let config     = config->mysql->{name}->toArray();
 
         if !is_array(reset(config)) {
             let this->dbConfigs = [config];

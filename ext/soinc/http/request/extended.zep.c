@@ -14,6 +14,7 @@
 #include "kernel/main.h"
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
+#include "kernel/operators.h"
 #include "kernel/string.h"
 
 
@@ -31,7 +32,7 @@ ZEPHIR_INIT_CLASS(Soinc_Http_Request_Extended) {
 PHP_METHOD(Soinc_Http_Request_Extended, fromMobile) {
 
 	zend_bool _1;
-	zval *_0 = NULL, *_2 = NULL;
+	zval *_0 = NULL, *_2 = NULL, *_3 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
@@ -44,10 +45,15 @@ PHP_METHOD(Soinc_Http_Request_Extended, fromMobile) {
 		zephir_check_call_status();
 		_1 = zephir_is_true(_2);
 	}
+	ZEPHIR_CALL_METHOD(&_3, this_ptr, "fromios", NULL, 0);
+	zephir_check_call_status();
 	if (_1) {
 		RETURN_MM_BOOL(1);
+	} else if (zephir_is_true(_3)) {
+		RETURN_MM_BOOL(1);
+	} else {
+		RETURN_MM_BOOL(0);
 	}
-	RETURN_MM_BOOL(0);
 
 }
 

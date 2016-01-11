@@ -44,6 +44,18 @@ class Model extends \Phalcon\Mvc\Model
         return false;
     }
 
+    public function getErrCode(var sqlErr)
+    {
+        var matches,result;
+        let result = preg_match_all("/[(\w+)]/", sqlErr, matches);
+        if result {
+            return reset(result);
+        }
+        else {
+            return 0;
+        }
+    }
+
     public function createBuilder(string! alias = "") -> <\Phalcon\Mvc\Model\Query\BuilderInterface>
     {
         var source;

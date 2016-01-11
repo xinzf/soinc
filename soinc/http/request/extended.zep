@@ -12,8 +12,12 @@ class Extended extends \Phalcon\Http\Request
         if this->fromAndroid() || this->fromIOS() {
             return true;
         }
-
-        return false;
+        elseif this->fromIOS() {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public function fromWeixin()

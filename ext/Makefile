@@ -11,7 +11,7 @@ SHLIB_DL_SUFFIX_NAME = so
 ZEND_EXT_TYPE = zend_extension
 RE2C = re2c
 AWK = awk
-shared_objects_soinc = soinc.lo kernel/main.lo kernel/memory.lo kernel/exception.lo kernel/hash.lo kernel/debug.lo kernel/backtrace.lo kernel/object.lo kernel/array.lo kernel/extended/array.lo kernel/string.lo kernel/fcall.lo kernel/extended/fcall.lo kernel/require.lo kernel/file.lo kernel/operators.lo kernel/math.lo kernel/concat.lo kernel/variables.lo kernel/filter.lo kernel/iterator.lo kernel/time.lo kernel/exit.lo soinc/logger/processor/abstractprocessor.lo soinc/abstractmodule.lo soinc/bootstrap.lo soinc/db/mysql.lo soinc/exception.lo soinc/http/curl/extended.lo soinc/http/request/extended.lo soinc/logger/formatter/line.lo soinc/logger/processor/trace.lo soinc/model/model.lo soinc/tools.lo
+shared_objects_soinc = soinc.lo kernel/main.lo kernel/memory.lo kernel/exception.lo kernel/hash.lo kernel/debug.lo kernel/backtrace.lo kernel/object.lo kernel/array.lo kernel/extended/array.lo kernel/string.lo kernel/fcall.lo kernel/extended/fcall.lo kernel/require.lo kernel/file.lo kernel/operators.lo kernel/math.lo kernel/concat.lo kernel/variables.lo kernel/filter.lo kernel/iterator.lo kernel/time.lo kernel/exit.lo soinc/exception.lo soinc/logger/processor/abstractprocessor.lo soinc/abstractmodule.lo soinc/bootstrap.lo soinc/db/mysql.lo soinc/exception/db.lo soinc/http/curl/extended.lo soinc/http/request/extended.lo soinc/http/response/cookies.lo soinc/logger/adapter/file.lo soinc/logger/formatter/line.lo soinc/logger/processor/trace.lo soinc/model/model.lo soinc/tools.lo soinc/worker/taskabstract.lo soinc/worker/worker.lo
 PHP_PECL_EXTENSION = soinc
 SOINC_SHARED_LIBADD =
 PHP_MODULES = $(phplibdir)/soinc.la
@@ -223,6 +223,8 @@ kernel/time.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/kernel/time.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/kernel/time.c -o kernel/time.lo 
 kernel/exit.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/kernel/exit.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/kernel/exit.c -o kernel/exit.lo 
+soinc/exception.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/exception.zep.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/exception.zep.c -o soinc/exception.lo 
 soinc/logger/processor/abstractprocessor.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/logger/processor/abstractprocessor.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/logger/processor/abstractprocessor.zep.c -o soinc/logger/processor/abstractprocessor.lo 
 soinc/abstractmodule.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/abstractmodule.zep.c
@@ -231,12 +233,16 @@ soinc/bootstrap.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/bootstrap.z
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/bootstrap.zep.c -o soinc/bootstrap.lo 
 soinc/db/mysql.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/db/mysql.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/db/mysql.zep.c -o soinc/db/mysql.lo 
-soinc/exception.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/exception.zep.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/exception.zep.c -o soinc/exception.lo 
+soinc/exception/db.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/exception/db.zep.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/exception/db.zep.c -o soinc/exception/db.lo 
 soinc/http/curl/extended.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/http/curl/extended.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/http/curl/extended.zep.c -o soinc/http/curl/extended.lo 
 soinc/http/request/extended.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/http/request/extended.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/http/request/extended.zep.c -o soinc/http/request/extended.lo 
+soinc/http/response/cookies.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/http/response/cookies.zep.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/http/response/cookies.zep.c -o soinc/http/response/cookies.lo 
+soinc/logger/adapter/file.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/logger/adapter/file.zep.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/logger/adapter/file.zep.c -o soinc/logger/adapter/file.lo 
 soinc/logger/formatter/line.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/logger/formatter/line.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/logger/formatter/line.zep.c -o soinc/logger/formatter/line.lo 
 soinc/logger/processor/trace.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/logger/processor/trace.zep.c
@@ -245,6 +251,10 @@ soinc/model/model.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/model/mod
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/model/model.zep.c -o soinc/model/model.lo 
 soinc/tools.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/tools.zep.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/tools.zep.c -o soinc/tools.lo 
+soinc/worker/taskabstract.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/worker/taskabstract.zep.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/worker/taskabstract.zep.c -o soinc/worker/taskabstract.lo 
+soinc/worker/worker.lo: /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/worker/worker.zep.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/xiangzhi/workspace/zephir/soinc/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/xiangzhi/workspace/zephir/soinc/ext/soinc/worker/worker.zep.c -o soinc/worker/worker.lo 
 $(phplibdir)/soinc.la: ./soinc.la
 	$(LIBTOOL) --mode=install cp ./soinc.la $(phplibdir)
 

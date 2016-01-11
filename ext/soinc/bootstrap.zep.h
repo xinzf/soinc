@@ -10,11 +10,11 @@ PHP_METHOD(Soinc_Bootstrap, exec);
 PHP_METHOD(Soinc_Bootstrap, execTask);
 PHP_METHOD(Soinc_Bootstrap, execWeb);
 PHP_METHOD(Soinc_Bootstrap, execMicro);
-PHP_METHOD(Soinc_Bootstrap, execSrv);
 PHP_METHOD(Soinc_Bootstrap, getDI);
 PHP_METHOD(Soinc_Bootstrap, getEnv);
 PHP_METHOD(Soinc_Bootstrap, getConfig);
 PHP_METHOD(Soinc_Bootstrap, getAppPath);
+PHP_METHOD(Soinc_Bootstrap, getLoader);
 PHP_METHOD(Soinc_Bootstrap, load);
 PHP_METHOD(Soinc_Bootstrap, loaderModule);
 static zend_object_value zephir_init_properties_Soinc_Bootstrap(zend_class_entry *class_type TSRMLS_DC);
@@ -39,10 +39,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_soinc_bootstrap_execmicro, 0, 0, 0)
 	ZEND_ARG_INFO(0, argv)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_soinc_bootstrap_execsrv, 0, 0, 0)
-	ZEND_ARG_INFO(0, arg)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_soinc_bootstrap_load, 0, 0, 1)
 	ZEND_ARG_INFO(0, filePath)
 ZEND_END_ARG_INFO()
@@ -55,11 +51,11 @@ ZEPHIR_INIT_FUNCS(soinc_bootstrap_method_entry) {
 	PHP_ME(Soinc_Bootstrap, execTask, arginfo_soinc_bootstrap_exectask, ZEND_ACC_PUBLIC)
 	PHP_ME(Soinc_Bootstrap, execWeb, arginfo_soinc_bootstrap_execweb, ZEND_ACC_PUBLIC)
 	PHP_ME(Soinc_Bootstrap, execMicro, arginfo_soinc_bootstrap_execmicro, ZEND_ACC_PUBLIC)
-	PHP_ME(Soinc_Bootstrap, execSrv, arginfo_soinc_bootstrap_execsrv, ZEND_ACC_PUBLIC)
 	PHP_ME(Soinc_Bootstrap, getDI, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Soinc_Bootstrap, getEnv, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Soinc_Bootstrap, getConfig, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Soinc_Bootstrap, getAppPath, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Soinc_Bootstrap, getLoader, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Soinc_Bootstrap, load, arginfo_soinc_bootstrap_load, ZEND_ACC_PUBLIC)
 	PHP_ME(Soinc_Bootstrap, loaderModule, NULL, ZEND_ACC_PUBLIC)
 	PHP_FE_END

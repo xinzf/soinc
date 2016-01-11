@@ -1,9 +1,0 @@
-/Users/xiangzhi/workspace/zephir/soinc/ext/kernel/fcall.c:58:9: warning: nonnull parameter 'ce' will evaluate to 'true' on first encounter [-Wpointer-bool-conversion]
-        while (ce) {
-        ~~~~~  ^~
-1 warning generated.
-/Users/xiangzhi/workspace/zephir/soinc/ext/kernel/require.c:54:7: warning: nonnull parameter 'require_path' will evaluate to 'true' on first encounter [-Wpointer-bool-conversion]
-        if (!require_path) {
-            ~^~~~~~~~~~~~
-1 warning generated.
-warning: no debug symbols in executable (-arch x86_64)

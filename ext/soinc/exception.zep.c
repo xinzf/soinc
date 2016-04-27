@@ -25,9 +25,11 @@ ZEPHIR_INIT_CLASS(Soinc_Exception) {
 
 	zend_declare_property_string(soinc_exception_ce, SL("message"), "", ZEND_ACC_PROTECTED TSRMLS_CC);
 
-	zend_declare_property_long(soinc_exception_ce, SL("level"), 3, ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_string(soinc_exception_ce, SL("level"), "Exception", ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	zend_declare_property_long(soinc_exception_ce, SL("code"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
+
+	zend_declare_property_null(soinc_exception_ce, SL("logger"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	return SUCCESS;
 
@@ -35,8 +37,7 @@ ZEPHIR_INIT_CLASS(Soinc_Exception) {
 
 PHP_METHOD(Soinc_Exception, __construct) {
 
-	int ZEPHIR_LAST_CALL_STATUS;
-	zval *message = NULL, *code = NULL, *logger = NULL, *_0$$3, *_1$$4 = NULL, *_2;
+	zval *message = NULL, *code = NULL, *logger = NULL, *_0$$3, *_1;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 3, &message, &code, &logger);
@@ -61,14 +62,9 @@ PHP_METHOD(Soinc_Exception, __construct) {
 		ZEPHIR_INIT_NVAR(message);
 		ZEPHIR_CONCAT_SV(message, "An exception created: ", _0$$3);
 	}
-	if (!(Z_TYPE_P(logger) == IS_NULL)) {
-		ZEPHIR_CALL_METHOD(&_1$$4, this_ptr, "getlevel", NULL, 0);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, logger, "log", NULL, 0, message, _1$$4);
-		zephir_check_call_status();
-	}
-	_2 = zephir_fetch_nproperty_this(this_ptr, SL("message"), PH_NOISY_CC);
-	if (ZEPHIR_IS_EMPTY(_2)) {
+	zephir_update_property_this(this_ptr, SL("logger"), logger TSRMLS_CC);
+	_1 = zephir_fetch_nproperty_this(this_ptr, SL("message"), PH_NOISY_CC);
+	if (ZEPHIR_IS_EMPTY(_1)) {
 		zephir_update_property_this(this_ptr, SL("message"), message TSRMLS_CC);
 	}
 	if (!(Z_TYPE_P(code) == IS_NULL)) {
@@ -109,6 +105,27 @@ PHP_METHOD(Soinc_Exception, setLevel) {
 
 	zephir_update_property_this(this_ptr, SL("level"), level TSRMLS_CC);
 	RETURN_THISW();
+
+}
+
+PHP_METHOD(Soinc_Exception, __desctruct) {
+
+	zval *_0, *_1$$3, *_2$$3 = NULL, *_3$$3 = NULL;
+	int ZEPHIR_LAST_CALL_STATUS;
+
+	ZEPHIR_MM_GROW();
+
+	_0 = zephir_fetch_nproperty_this(this_ptr, SL("logger"), PH_NOISY_CC);
+	if (!(zephir_is_true(_0))) {
+		_1$$3 = zephir_fetch_nproperty_this(this_ptr, SL("logger"), PH_NOISY_CC);
+		ZEPHIR_CALL_METHOD(&_2$$3, this_ptr, "getlevel", NULL, 0);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(&_3$$3, this_ptr, "getmessage", NULL, 0);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, _1$$3, "log", NULL, 0, _2$$3, _3$$3);
+		zephir_check_call_status();
+	}
+	ZEPHIR_MM_RESTORE();
 
 }
 

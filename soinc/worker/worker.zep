@@ -33,10 +33,10 @@ class Worker extends \Phalcon\Mvc\User\Component
     protected _masterPid = 0;
 
     /**
-     * \Phalcon\Process\Worker
+     * \Soinc\Worker\TaskAbstract
      * @var Worker
      */
-    private _currentWorker = null;
+    private _task = null;
 
     protected _pids = [];
 
@@ -68,7 +68,7 @@ class Worker extends \Phalcon\Mvc\User\Component
 
     public function setWorker(<\Soinc\Worker\TaskAbstract> task)
     {
-        let this->_currentWorker = task;
+        let this->_task = task;
         return this;
     }
 
@@ -105,7 +105,7 @@ class Worker extends \Phalcon\Mvc\User\Component
     {
         this->initStop();
         posix_kill(this->_masterPid,SIGINT);
-        echo "Waiting shutdown....\n";
+        echo "\nWaiting shutdown....\n";
         while true {
             var pid = posix_kill(this->_masterPid,0);
             if !pid {
@@ -126,27 +126,28 @@ class Worker extends \Phalcon\Mvc\User\Component
             var _pids,_pid;
             let _pids = this->getAllChildrenPids();
             this->log("Task[".this->name."] Stopping...");
+            this->log("pids:".json_encode(_pids));
             for _pid in _pids {
                 posix_kill(_pid,SIGTERM);
                 let this->_pidsToShutdown[_pid] = time();
             }
         }
         else {
-            this->_currentWorker->stop();
+            this->_task->onStop();
             exit(0);
         }
     }
 
     protected function init()
     {
-        if empty(this->_currentWorker) {
-            this->log("Please provide the Worker!");
+        if empty(this->_task) {
+            this->log("Please provide the Task!");
             exit(0);
         }
 
-        let this->name = this->_currentWorker->getName();
+        let this->name = this->_task->getName();
         if !this->name {
-            this->log("Please provide the Worker's name!");
+            this->log("Please provide the Task's name!");
             exit(0);
         }
 
@@ -217,10 +218,16 @@ class Worker extends \Phalcon\Mvc\User\Component
         elseif 0 != pid {
             exit(0);
         }
+
+        /** @todo 脚本退出关闭所有子进程，待测 */
+        register_shutdown_function([this,"stopAll"]);
+
+        this->_task->onMasterStart();
     }
 
     protected function installSignal()
     {
+        pcntl_signal(SIGTERM,[this,"signalHandler"],false);
         pcntl_signal(SIGINT,[this,"signalHandler"],false);
         pcntl_signal(SIGUSR1,[this,"signalHandler"],false);
         pcntl_signal(SIGUSR2,[this,"signalHandler"],false);
@@ -237,9 +244,10 @@ class Worker extends \Phalcon\Mvc\User\Component
 
     public function signalHandler(var signal)
     {
-        this->log("Signal:{signal}");
+        this->log("Signal:".signal);
         switch signal {
             case SIGINT:
+            case SIGTERM:
                 this->stopAll();
                 break;
 
@@ -270,14 +278,9 @@ class Worker extends \Phalcon\Mvc\User\Component
 
     protected function forkChildren()
     {
-        while count(this->_pids) < this->_currentWorker->getCount() {
+        while count(this->_pids) < this->_task->getProcessNum() {
             this->forkOneChild();
         }
-
-        if this->_currentWorker->getOnStart() {
-            call_user_func(this->_currentWorker->getOnStart(),this);
-        }
-
     }
 
     private function forkOneChild()
@@ -285,24 +288,22 @@ class Worker extends \Phalcon\Mvc\User\Component
         var pid;
         let pid = pcntl_fork();
         if pid > 0 {
+            /** @todo 貌似没有获取到子进程ID */
             let this->_pids[pid] = pid;
-            // $this->_pids[$pid] = Worker::facotry($pid);
         }
         elseif 0 == pid {
             if this->_status == self::STATUS_STARTING {
                 // $this->resetStd();
             }
 
-            // set_error_handler(array($this,'errorHandler'));
-            // set_exception_handler(array($this,'exceptionHandler'));
-
             var mypid;
             let this->_pids = [];
-            this->setProcessTitle("Task: worker process ".this->_currentWorker->getName());
-            this->setProcessUser(this->_currentWorker->getUser());
+            this->setProcessTitle("Task: worker process ".this->_task->getName());
+            this->setProcessUser(this->_task->getUser());
             let mypid = getmypid();
             this->log("Task[".this->name."]: worker process ".mypid." start success!");
-            this->_currentWorker->run();
+            this->_task->onStart();
+            this->_task->run();
             exit(250);
         }
         else {
@@ -350,7 +351,7 @@ class Worker extends \Phalcon\Mvc\User\Component
             if pid > 0 {
                 if isset(this->_pids[pid]) {
                     if status !== 0 {
-                        this->log("Worker[".this->name."]:".pid." exit with status ".status);
+                        this->log("Task[".this->name."]:".pid." exit with status ".status);
                     }
                     unset(this->_pids[pid]);
                 }
@@ -368,10 +369,7 @@ class Worker extends \Phalcon\Mvc\User\Component
                         unlink(this->pidFile);
                         this->log("Task[".this->name."] has been stopped!");
 
-                        if this->_currentWorker->getOnStop() {
-                            call_user_func(this->_currentWorker->getOnStop(),this);
-                        }
-
+                        this->_task->onMasterStop();
                         exit(0);
                     }
                 }
@@ -442,6 +440,7 @@ class Worker extends \Phalcon\Mvc\User\Component
 
         var pid = file_get_contents(this->pidFile);
         if empty(pid) {
+            unlink(this->pidFile);
             return false;
         }
 

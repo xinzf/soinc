@@ -6,6 +6,64 @@ namespace Soinc\Http\Request;
 */
 class Extended extends \Phalcon\Http\Request
 {
+    protected allowds = [];
+
+    public function setAllowed(iplist) {
+        let this->allowds = array_merge(this->allowds,iplist);
+        return true;
+    }
+
+    private function compareIp(clientIp,serverIp) {
+        if (strpos(serverIp,"*") !== false) {
+            var key;
+            var num;
+
+            let clientIp = explode(".",clientIp);
+            let serverIp = explode(".",serverIp);
+
+            for key,num in serverIp {
+                if (num === "*" || (num === clientIp[key])) {
+                    continue;
+                }
+                else {
+                    return false;
+                }
+            }   
+            return true;
+        }
+        elseif (clientIp === serverIp) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function isAllowed() {
+        var clientIp;
+        var currentIp;
+        var serverIp;
+
+        let clientIp  = this->getClientAddress();
+        let currentIp = this->getServerAddress();
+
+        if clientIp === currentIp {
+            return true;
+        }
+
+        if !this->allowds {
+            return true;
+        }
+
+        for serverIp in this->allowds {
+            if this->compareIp(clientIp,serverIp) {
+                return true;
+            }
+        }
+
+        echo "Forbidden!";
+        exit();
+    }
     
     public function fromMobile()
     {

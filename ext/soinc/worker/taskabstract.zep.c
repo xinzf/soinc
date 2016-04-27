@@ -37,7 +37,7 @@ PHP_METHOD(Soinc_Worker_TaskAbstract, getName) {
  * 获取进程数量
  * @return integer 数量
  */
-PHP_METHOD(Soinc_Worker_TaskAbstract, getCount) {
+PHP_METHOD(Soinc_Worker_TaskAbstract, getProcessNum) {
 
 }
 
@@ -50,26 +50,36 @@ PHP_METHOD(Soinc_Worker_TaskAbstract, getUser) {
 }
 
 /**
- * 获取在主进程启动前的钩子
+ * 主进程启动后立刻回调
  * @return function 匿名函数
  */
-PHP_METHOD(Soinc_Worker_TaskAbstract, getOnStart) {
+PHP_METHOD(Soinc_Worker_TaskAbstract, onMasterStart) {
 
 }
 
 /**
- * 获取在主进程结束后的钩子
+ * 主进程结束后回调
  * @return function 匿名函数
  */
-PHP_METHOD(Soinc_Worker_TaskAbstract, getOnStop) {
+PHP_METHOD(Soinc_Worker_TaskAbstract, onMasterStop) {
 
 }
 
 /**
- * 获取当进程出错的时候调用的钩子
- * @return function 匿名函数
+ * 逻辑进程启动后立刻回调
+ * @param  {[type]} <SoincWorkerWorker> worker        [description]
+ * @return {[type]}                     [description]
  */
-PHP_METHOD(Soinc_Worker_TaskAbstract, getOnError) {
+PHP_METHOD(Soinc_Worker_TaskAbstract, onStart) {
+
+}
+
+/**
+ * 逻辑进程结束时回调
+ * @param  {[type]} <SoincWorkerWorker> worker        [description]
+ * @return {[type]}                     [description]
+ */
+PHP_METHOD(Soinc_Worker_TaskAbstract, onStop) {
 
 }
 
@@ -78,14 +88,6 @@ PHP_METHOD(Soinc_Worker_TaskAbstract, getOnError) {
  * @return boolean 执行结果
  */
 PHP_METHOD(Soinc_Worker_TaskAbstract, run) {
-
-}
-
-/**
- * 停止进程逻辑
- * @return [type] [description]
- */
-PHP_METHOD(Soinc_Worker_TaskAbstract, stop) {
 
 }
 

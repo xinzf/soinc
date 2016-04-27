@@ -1,10 +1,4 @@
-//<?php
 namespace Soinc;
-
-// if !class_exists("\Phalcon\Loader",false) {
-    // error_log("Soinc must requied Phalcon Framework!");
-    // exit();
-// }
 
 /**
 * Bootsrap
@@ -21,6 +15,8 @@ final class Bootstrap
 
     protected loader;
 
+    protected application;
+
     protected modeMap = [
         "Web"     : "Web",
         "Cli"     : "Task",
@@ -31,6 +27,11 @@ final class Bootstrap
 
     public function __construct(string! appPath)
     {
+        if !class_exists("\Phalcon\Loader",false) {
+            error_log("Soinc must requied Phalcon Framework!");
+            exit();
+        }
+
         if (!is_dir(appPath)) {
             throw new \Exception("The application path is not exists", 1);
         }
@@ -46,33 +47,56 @@ final class Bootstrap
             let this->env = env;
         }
 
-        if this->env != "product" {
-            var debug;
-            let debug = new \Phalcon\Debug();
-            debug->listen();
-        }
+        // if this->env != "product" {
+        //     var debug;
+        //     let debug = new \Phalcon\Debug();
+        //     debug->listen();
+        // }
 
         var globalConfig;
-        let globalConfig = get_cfg_var("soinc.global_conf");
+        let globalConfig = get_cfg_var("soinc.conf");
         if globalConfig {
             if !file_exists(globalConfig) {
                 throw new \Exception("The global configure file is not exists! Detail: ".globalConfig, 1);
             }
-            let this->config = new \Phalcon\Config\Adapter\Php(globalConfig);
+
+            var ext;
+            let ext = pathinfo(globalConfig,PATHINFO_EXTENSION);
+            if ext == "ini" {
+                let this->config = new \Phalcon\Config\Adapter\Ini(globalConfig);
+            }
+            elseif ext == "php" {
+                let this->config = new \Phalcon\Config\Adapter\Php(globalConfig);
+            }
+            else {
+                let this->config = new \Phalcon\Config;
+            }
         }
         else {
             let this->config = new \Phalcon\Config;
         }
 
         var appConfigPath;
-        let appConfigPath = this->appPath . "config/".this->env.".php";
+        let appConfigPath = this->appPath . "Config/".this->env.".php";
         if file_exists(appConfigPath) {
             this->config->merge(new \Phalcon\Config(this->load(appConfigPath)));
+        }
+        else {
+            throw new \Exception("The config file:".appConfigPath." not exists!");
         }
 
         var paths = [];
         let paths = [this->appPath];
         this->loader->registerDirs(paths)->register();
+
+        var composer;
+        let composer = get_cfg_var("soinc.composer");
+        if composer {
+            if !file_exists(composer) {
+                throw new \Exception("The composer autoload file is not exists! Detail: ".composer, 1);
+            }
+            require composer;
+        }
     }
 
     protected function initBaseService()
@@ -100,11 +124,9 @@ final class Bootstrap
 
     public function execTask(array argv)
     {
-        var console;
-
         let this->di = new \Phalcon\DI\FactoryDefault\CLI();
-        let console = new \Phalcon\ClI\Console();
-        console->setDI(this->di);
+        let this->application = new \Phalcon\ClI\Console();
+        this->application->setDI(this->di);
 
         this->initBaseService();
         this->loaderModule();
@@ -128,22 +150,21 @@ final class Bootstrap
         unset(argv[2]);
         let params = array_values(argv);
         let arguments = ["task":task,"action":action,"params":params];
-        console->handle(arguments);
+        this->application->handle(arguments);
     }
 
     public function execWeb(string! uri = null)
     {
-        var application;
         let this->di = new \Phalcon\DI\FactoryDefault();
-        let application = new \Phalcon\Mvc\Application();
-        application->setDI(this->di);
+        let this->application = new \Phalcon\Mvc\Application();
+        this->application->setDI(this->di);
 
         this->initBaseService();
         this->loaderModule();
 
         var e;
         try {
-            echo application->handle(uri)->getContent();
+            echo this->application->handle(uri)->getContent();
         } catch \Phalcon\Mvc\Application\Exception, e {
             var str;
             let str = e->getMessage()."[{e->getFile()}: {e->getLine()}]\n".e->getTraceAsString();
@@ -153,23 +174,23 @@ final class Bootstrap
 
     public function execMicro(var argv = null) 
     {
-        var app, e, handleFiles, index, file, response;
+        var e, handleFiles, file, response;
         let this->di = new \Phalcon\DI\FactoryDefault();
-        let app = new \Phalcon\Mvc\Micro();
-        let {"app"} = app;
-        let handleFiles = array_merge(glob(this->appPath."handlers/*.php"),glob(this->appPath."handlers/*/*.php"));
+        let this->application = new \Phalcon\Mvc\Micro();
+        let {"app"} = this->application;
+        let handleFiles = array_merge(glob(this->appPath."Handlers/*.php"),glob(this->appPath."Handlers/*/*.php"));
 
         try {
-            app->setDI(this->di);
+            this->application->setDI(this->di);
 
             this->initBaseService();
             this->loaderModule();
 
-            for index, file in handleFiles {
+            for file in handleFiles {
                 require file;
             }
 
-            let response = app->handle();
+            let response = this->application->handle();
             if response instanceof \Phalcon\Http\ResponseInterface {
                 response->send();
             }
@@ -180,7 +201,11 @@ final class Bootstrap
         }
     }
 
-    public function getDI() -> <\Phalcon\DI>
+    public function getApplication() {
+        return this->application;
+    }
+
+    public function getDi() -> <\Phalcon\DI>
     {
         return this->di;
     }
@@ -231,14 +256,23 @@ final class Bootstrap
         let dirs       = module->registerDirs();
         let namespaces = module->registerNamespaces();
 
-        this->loader->registerDirs(dirs,true);
-        this->loader->registerNamespaces(namespaces,true);
+        if dirs {
+            this->loader->registerDirs(dirs,true);
+        }
+
+        if namespaces {
+            this->loader->registerNamespaces(namespaces,true);
+        }
+
         this->loader->register();
 
         let services   = module->registerServices();
-        var name,obj;
-        for name,obj in services {
-            this->di->setShared(name,obj);
+        if services {
+            var name,obj;
+            for name,obj in services {
+                this->di->setShared(name,obj);
+            }    
         }
+        module->init();
     }
 }

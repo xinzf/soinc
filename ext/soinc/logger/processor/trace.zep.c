@@ -91,14 +91,14 @@ PHP_METHOD(Soinc_Logger_Processor_Trace, __toString) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_FUNCTION(&trace, "debug_backtrace", NULL, 36);
+	ZEPHIR_CALL_FUNCTION(&trace, "debug_backtrace", NULL, 40);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(trace);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_shift", &_0, 37, trace);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_shift", &_0, 41, trace);
 	ZEPHIR_UNREF(trace);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(trace);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_shift", &_0, 37, trace);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_shift", &_0, 41, trace);
 	ZEPHIR_UNREF(trace);
 	zephir_check_call_status();
 	i = 0;
@@ -202,7 +202,7 @@ PHP_METHOD(Soinc_Logger_Processor_Trace, __toString) {
 
 }
 
-static zend_object_value zephir_init_properties_Soinc_Logger_Processor_Trace(zend_class_entry *class_type TSRMLS_DC) {
+zend_object_value zephir_init_properties_Soinc_Logger_Processor_Trace(zend_class_entry *class_type TSRMLS_DC) {
 
 		zval *_0, *_1$$3;
 

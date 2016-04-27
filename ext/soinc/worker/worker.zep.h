@@ -32,7 +32,7 @@ PHP_METHOD(Soinc_Worker_Worker, log);
 PHP_METHOD(Soinc_Worker_Worker, getAllChildrenPids);
 PHP_METHOD(Soinc_Worker_Worker, writeToStatus);
 PHP_METHOD(Soinc_Worker_Worker, isAlive);
-static zend_object_value zephir_init_properties_Soinc_Worker_Worker(zend_class_entry *class_type TSRMLS_DC);
+zend_object_value zephir_init_properties_Soinc_Worker_Worker(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_soinc_worker_worker_setdaemonize, 0, 0, 0)
 	ZEND_ARG_INFO(0, flag)

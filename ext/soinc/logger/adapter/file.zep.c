@@ -54,14 +54,14 @@ PHP_METHOD(Soinc_Logger_Adapter_File, __construct) {
 
 
 	if ((zephir_file_exists(filePath TSRMLS_CC) == SUCCESS)) {
-		ZEPHIR_CALL_FUNCTION(&_0$$3, "is_writable", NULL, 30, filePath);
+		ZEPHIR_CALL_FUNCTION(&_0$$3, "is_writable", NULL, 34, filePath);
 		zephir_check_call_status();
 		if (!(zephir_is_true(_0$$3))) {
 			ZEPHIR_INIT_VAR(_1$$4);
 			object_init_ex(_1$$4, zend_exception_get_default(TSRMLS_C));
 			ZEPHIR_INIT_VAR(_2$$4);
 			ZEPHIR_CONCAT_SV(_2$$4, "PHP Fatal error: Soinc::Logger::File failed to write log path: ", filePath);
-			ZEPHIR_CALL_METHOD(NULL, _1$$4, "__construct", NULL, 6, _2$$4);
+			ZEPHIR_CALL_METHOD(NULL, _1$$4, "__construct", NULL, 9, _2$$4);
 			zephir_check_call_status();
 			zephir_throw_exception_debug(_1$$4, "soinc/logger/adapter/file.zep", 9 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
@@ -71,21 +71,21 @@ PHP_METHOD(Soinc_Logger_Adapter_File, __construct) {
 			zephir_check_call_status();
 		}
 	} else {
-		ZEPHIR_CALL_FUNCTION(&parentPath$$6, "dirname", NULL, 31, filePath);
+		ZEPHIR_CALL_FUNCTION(&parentPath$$6, "dirname", NULL, 35, filePath);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_3$$6, "is_dir", NULL, 5, parentPath$$6);
+		ZEPHIR_CALL_FUNCTION(&_3$$6, "is_dir", NULL, 8, parentPath$$6);
 		zephir_check_call_status();
 		if (!(zephir_is_true(_3$$6))) {
 			ZEPHIR_SINIT_VAR(_4$$7);
 			ZVAL_LONG(&_4$$7, 0777);
-			ZEPHIR_CALL_FUNCTION(&_5$$7, "mkdir", NULL, 32, parentPath$$6, &_4$$7, ZEPHIR_GLOBAL(global_true));
+			ZEPHIR_CALL_FUNCTION(&_5$$7, "mkdir", NULL, 36, parentPath$$6, &_4$$7, ZEPHIR_GLOBAL(global_true));
 			zephir_check_call_status();
 			if (!(zephir_is_true(_5$$7))) {
 				ZEPHIR_INIT_VAR(_6$$8);
 				object_init_ex(_6$$8, zend_exception_get_default(TSRMLS_C));
 				ZEPHIR_INIT_VAR(_7$$8);
 				ZEPHIR_CONCAT_SV(_7$$8, "PHP Fatal error: Soinc::Logger::File failed to create log path: ", parentPath$$6);
-				ZEPHIR_CALL_METHOD(NULL, _6$$8, "__construct", NULL, 6, _7$$8);
+				ZEPHIR_CALL_METHOD(NULL, _6$$8, "__construct", NULL, 9, _7$$8);
 				zephir_check_call_status();
 				zephir_throw_exception_debug(_6$$8, "soinc/logger/adapter/file.zep", 21 TSRMLS_CC);
 				ZEPHIR_MM_RESTORE();

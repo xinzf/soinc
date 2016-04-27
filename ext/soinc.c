@@ -29,9 +29,11 @@
 
 zend_class_entry *soinc_exception_ce;
 zend_class_entry *soinc_logger_processor_abstractprocessor_ce;
+zend_class_entry *soinc_abstractdfs_ce;
 zend_class_entry *soinc_abstractmodule_ce;
 zend_class_entry *soinc_bootstrap_ce;
 zend_class_entry *soinc_db_mysql_ce;
+zend_class_entry *soinc_dfs_fastdfs_ce;
 zend_class_entry *soinc_exception_db_ce;
 zend_class_entry *soinc_http_curl_extended_ce;
 zend_class_entry *soinc_http_request_extended_ce;
@@ -39,8 +41,8 @@ zend_class_entry *soinc_http_response_cookies_ce;
 zend_class_entry *soinc_logger_adapter_file_ce;
 zend_class_entry *soinc_logger_formatter_line_ce;
 zend_class_entry *soinc_logger_processor_trace_ce;
-zend_class_entry *soinc_model_model_ce;
-zend_class_entry *soinc_tools_ce;
+zend_class_entry *soinc_model_ce;
+zend_class_entry *soinc_utils_ce;
 zend_class_entry *soinc_worker_taskabstract_ce;
 zend_class_entry *soinc_worker_worker_ce;
 
@@ -70,9 +72,11 @@ static PHP_MINIT_FUNCTION(soinc)
 	REGISTER_INI_ENTRIES();
 	ZEPHIR_INIT(Soinc_Exception);
 	ZEPHIR_INIT(Soinc_Logger_Processor_AbstractProcessor);
+	ZEPHIR_INIT(Soinc_AbstractDfs);
 	ZEPHIR_INIT(Soinc_AbstractModule);
 	ZEPHIR_INIT(Soinc_Bootstrap);
 	ZEPHIR_INIT(Soinc_Db_Mysql);
+	ZEPHIR_INIT(Soinc_Dfs_Fastdfs);
 	ZEPHIR_INIT(Soinc_Exception_Db);
 	ZEPHIR_INIT(Soinc_Http_Curl_Extended);
 	ZEPHIR_INIT(Soinc_Http_Request_Extended);
@@ -80,8 +84,8 @@ static PHP_MINIT_FUNCTION(soinc)
 	ZEPHIR_INIT(Soinc_Logger_Adapter_File);
 	ZEPHIR_INIT(Soinc_Logger_Formatter_Line);
 	ZEPHIR_INIT(Soinc_Logger_Processor_Trace);
-	ZEPHIR_INIT(Soinc_Model_Model);
-	ZEPHIR_INIT(Soinc_Tools);
+	ZEPHIR_INIT(Soinc_Model);
+	ZEPHIR_INIT(Soinc_Utils);
 	ZEPHIR_INIT(Soinc_Worker_TaskAbstract);
 	ZEPHIR_INIT(Soinc_Worker_Worker);
 

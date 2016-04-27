@@ -17,7 +17,7 @@ abstract class TaskAbstract extends \Phalcon\Mvc\User\Component
      * 获取进程数量
      * @return integer 数量
      */
-    abstract public function getCount();
+    abstract public function getProcessNum();
 
     /**
      * 获取进程运行用户
@@ -26,33 +26,34 @@ abstract class TaskAbstract extends \Phalcon\Mvc\User\Component
     abstract public function getUser();
 
     /**
-     * 获取在主进程启动前的钩子
+     * 主进程启动后立刻回调
      * @return function 匿名函数
      */
-    abstract public function getOnStart();
+    abstract public function onMasterStart();
 
     /**
-     * 获取在主进程结束后的钩子
+     * 主进程结束后回调
      * @return function 匿名函数
      */
-    abstract public function getOnStop();
+    abstract public function onMasterStop();
 
     /**
-     * 获取当进程出错的时候调用的钩子
-     * @return function 匿名函数
+     * 逻辑进程启动后立刻回调
+     * @param  {[type]} <SoincWorkerWorker> worker        [description]
+     * @return {[type]}                     [description]
      */
-    abstract public function getOnError();
+    abstract public function onStart();
+
+    /**
+     * 逻辑进程结束时回调
+     * @param  {[type]} <SoincWorkerWorker> worker        [description]
+     * @return {[type]}                     [description]
+     */
+    abstract public function onStop();
 
     /**
      * 执行进程逻辑
      * @return boolean 执行结果
      */
     abstract public function run();
-
-    /**
-     * 停止进程逻辑
-     * @return [type] [description]
-     */
-    abstract public function stop();
-
 }

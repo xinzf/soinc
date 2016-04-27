@@ -7,7 +7,7 @@ PHP_METHOD(Soinc_Logger_Formatter_Line, __construct);
 PHP_METHOD(Soinc_Logger_Formatter_Line, format);
 PHP_METHOD(Soinc_Logger_Formatter_Line, addProcessor);
 PHP_METHOD(Soinc_Logger_Formatter_Line, __get);
-static zend_object_value zephir_init_properties_Soinc_Logger_Formatter_Line(zend_class_entry *class_type TSRMLS_DC);
+zend_object_value zephir_init_properties_Soinc_Logger_Formatter_Line(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_soinc_logger_formatter_line___construct, 0, 0, 1)
 	ZEND_ARG_INFO(0, formatString)

@@ -5,7 +5,7 @@ namespace Soinc;
 /**
 * Dfs
 */
-abstract class Dfs extends \Phalcon\Mvc\User\Component
+abstract class AbstractDfs extends \Phalcon\Mvc\User\Component
 {
 
     abstract protected function __construct(var options = null);

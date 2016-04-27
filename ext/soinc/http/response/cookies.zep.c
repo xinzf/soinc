@@ -278,7 +278,7 @@ PHP_METHOD(Soinc_Http_Response_Cookies, set) {
 	_8 = zephir_fetch_nproperty_this(this_ptr, SL("domain"), PH_NOISY_CC);
 	_9 = zephir_fetch_nproperty_this(this_ptr, SL("secure"), PH_NOISY_CC);
 	_10 = zephir_fetch_nproperty_this(this_ptr, SL("httpOnly"), PH_NOISY_CC);
-	ZEPHIR_RETURN_CALL_FUNCTION("setcookie", NULL, 29, name, value, &_7, _6, _8, _9, _10);
+	ZEPHIR_RETURN_CALL_FUNCTION("setcookie", NULL, 33, name, value, &_7, _6, _8, _9, _10);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -321,7 +321,7 @@ PHP_METHOD(Soinc_Http_Response_Cookies, delete) {
 	_4 = zephir_fetch_nproperty_this(this_ptr, SL("httpOnly"), PH_NOISY_CC);
 	ZEPHIR_SINIT_VAR(_5);
 	ZVAL_STRING(&_5, "", 0);
-	ZEPHIR_CALL_FUNCTION(NULL, "setcookie", NULL, 29, name, &_5, _0, _1, _2, _3, _4);
+	ZEPHIR_CALL_FUNCTION(NULL, "setcookie", NULL, 33, name, &_5, _0, _1, _2, _3, _4);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_6, this_ptr, "has", NULL, 0, name);
 	zephir_check_call_status();

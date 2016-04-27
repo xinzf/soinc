@@ -7,6 +7,7 @@ PHP_METHOD(Soinc_Exception, __construct);
 PHP_METHOD(Soinc_Exception, getLevel);
 PHP_METHOD(Soinc_Exception, setCode);
 PHP_METHOD(Soinc_Exception, setLevel);
+PHP_METHOD(Soinc_Exception, __desctruct);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_soinc_exception___construct, 0, 0, 0)
 	ZEND_ARG_INFO(0, message)
@@ -27,5 +28,6 @@ ZEPHIR_INIT_FUNCS(soinc_exception_method_entry) {
 	PHP_ME(Soinc_Exception, getLevel, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Soinc_Exception, setCode, arginfo_soinc_exception_setcode, ZEND_ACC_PUBLIC)
 	PHP_ME(Soinc_Exception, setLevel, arginfo_soinc_exception_setlevel, ZEND_ACC_PUBLIC)
+	PHP_ME(Soinc_Exception, __desctruct, NULL, ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };

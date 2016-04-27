@@ -18,7 +18,7 @@ PHP_METHOD(Soinc_Http_Curl_Extended, getResponseHeaders);
 PHP_METHOD(Soinc_Http_Curl_Extended, getLastRequest);
 PHP_METHOD(Soinc_Http_Curl_Extended, getError);
 PHP_METHOD(Soinc_Http_Curl_Extended, setOptions);
-static zend_object_value zephir_init_properties_Soinc_Http_Curl_Extended(zend_class_entry *class_type TSRMLS_DC);
+zend_object_value zephir_init_properties_Soinc_Http_Curl_Extended(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_soinc_http_curl_extended_seturl, 0, 0, 1)
 	ZEND_ARG_INFO(0, url)

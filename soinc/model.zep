@@ -1,4 +1,4 @@
-namespace Soinc\Model;
+namespace Soinc;
 
 class Model extends \Phalcon\Mvc\Model
 {

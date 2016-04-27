@@ -15,15 +15,11 @@
 
 
 /**
- * Tool
- *
- * description...
- *
- * @author Xiang Zhi <xiangzhi@cctvmall.cn>
- */
-ZEPHIR_INIT_CLASS(Soinc_Com_Tools) {
+* Fastdfs
+*/
+ZEPHIR_INIT_CLASS(Soinc_Dfs_Fastdfs) {
 
-	ZEPHIR_REGISTER_CLASS(Soinc\\Com, Tools, soinc, com_tools, NULL, 0);
+	ZEPHIR_REGISTER_CLASS(Soinc\\Dfs, Fastdfs, soinc, dfs_fastdfs, NULL, 0);
 
 	return SUCCESS;
 

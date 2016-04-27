@@ -1,11 +1,11 @@
 
 #ifdef HAVE_CONFIG_H
-#include "../../ext_config.h"
+#include "../ext_config.h"
 #endif
 
 #include <php.h>
-#include "../../php_ext.h"
-#include "../../ext.h"
+#include "../php_ext.h"
+#include "../ext.h"
 
 #include <Zend/zend_operators.h>
 #include <Zend/zend_exceptions.h>
@@ -22,19 +22,19 @@
 #include "kernel/exception.h"
 
 
-ZEPHIR_INIT_CLASS(Soinc_Model_Model) {
+ZEPHIR_INIT_CLASS(Soinc_Model) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Soinc\\Model, Model, soinc, model_model, zephir_get_internal_ce(SS("phalcon\\mvc\\model") TSRMLS_CC), soinc_model_model_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Soinc, Model, soinc, model, zephir_get_internal_ce(SS("phalcon\\mvc\\model") TSRMLS_CC), soinc_model_method_entry, 0);
 
-	zend_declare_property_null(soinc_model_model_ce, SL("created"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(soinc_model_ce, SL("created"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
-	zend_declare_property_null(soinc_model_model_ce, SL("updated"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(soinc_model_ce, SL("updated"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	return SUCCESS;
 
 }
 
-PHP_METHOD(Soinc_Model_Model, initialize) {
+PHP_METHOD(Soinc_Model, initialize) {
 
 	zval *_1 = NULL;
 	zval *_0;
@@ -59,7 +59,7 @@ PHP_METHOD(Soinc_Model_Model, initialize) {
 
 }
 
-PHP_METHOD(Soinc_Model_Model, __get) {
+PHP_METHOD(Soinc_Model, __get) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *name_param = NULL, *_0$$3 = NULL;
@@ -82,7 +82,7 @@ PHP_METHOD(Soinc_Model_Model, __get) {
 
 }
 
-PHP_METHOD(Soinc_Model_Model, getMessage) {
+PHP_METHOD(Soinc_Model, getMessage) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
 
@@ -94,7 +94,7 @@ PHP_METHOD(Soinc_Model_Model, getMessage) {
 
 }
 
-PHP_METHOD(Soinc_Model_Model, getFirstMessage) {
+PHP_METHOD(Soinc_Model, getFirstMessage) {
 
 	zval *_5$$3 = NULL;
 	zval *_0 = NULL, *_1, *_2$$3 = NULL, *_3$$3, *_4$$3 = NULL;
@@ -114,7 +114,7 @@ PHP_METHOD(Soinc_Model_Model, getFirstMessage) {
 		zephir_check_temp_parameter(_3$$3);
 		zephir_check_call_status();
 		ZEPHIR_MAKE_REF(_2$$3);
-		ZEPHIR_CALL_FUNCTION(&_4$$3, "current", NULL, 38, _2$$3);
+		ZEPHIR_CALL_FUNCTION(&_4$$3, "current", NULL, 42, _2$$3);
 		ZEPHIR_UNREF(_2$$3);
 		zephir_check_call_status();
 		zephir_get_strval(_5$$3, _4$$3);
@@ -124,7 +124,7 @@ PHP_METHOD(Soinc_Model_Model, getFirstMessage) {
 
 }
 
-PHP_METHOD(Soinc_Model_Model, getLastMessage) {
+PHP_METHOD(Soinc_Model, getLastMessage) {
 
 	zval *_5$$3 = NULL;
 	zval *_0 = NULL, *_1, *_2$$3 = NULL, *_3$$3, *_4$$3 = NULL;
@@ -144,7 +144,7 @@ PHP_METHOD(Soinc_Model_Model, getLastMessage) {
 		zephir_check_temp_parameter(_3$$3);
 		zephir_check_call_status();
 		ZEPHIR_MAKE_REF(_2$$3);
-		ZEPHIR_CALL_FUNCTION(&_4$$3, "end", NULL, 34, _2$$3);
+		ZEPHIR_CALL_FUNCTION(&_4$$3, "end", NULL, 38, _2$$3);
 		ZEPHIR_UNREF(_2$$3);
 		zephir_check_call_status();
 		zephir_get_strval(_5$$3, _4$$3);
@@ -154,7 +154,7 @@ PHP_METHOD(Soinc_Model_Model, getLastMessage) {
 
 }
 
-PHP_METHOD(Soinc_Model_Model, getErrCode) {
+PHP_METHOD(Soinc_Model, getErrCode) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *sqlErr, *matches = NULL, *result = NULL, _0;
@@ -170,7 +170,7 @@ PHP_METHOD(Soinc_Model_Model, getErrCode) {
 	zephir_preg_match(result, &_0, sqlErr, matches, 1, 0 , 0  TSRMLS_CC);
 	if (zephir_is_true(result)) {
 		ZEPHIR_MAKE_REF(result);
-		ZEPHIR_RETURN_CALL_FUNCTION("reset", NULL, 15, result);
+		ZEPHIR_RETURN_CALL_FUNCTION("reset", NULL, 19, result);
 		ZEPHIR_UNREF(result);
 		zephir_check_call_status();
 		RETURN_MM();
@@ -180,7 +180,7 @@ PHP_METHOD(Soinc_Model_Model, getErrCode) {
 
 }
 
-PHP_METHOD(Soinc_Model_Model, createBuilder) {
+PHP_METHOD(Soinc_Model, createBuilder) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *alias_param = NULL, *source = NULL, *_1 = NULL, *_2 = NULL, *_0$$3;
@@ -211,7 +211,7 @@ PHP_METHOD(Soinc_Model_Model, createBuilder) {
 		zephir_create_array(source, 1, 0 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(_0$$3);
 		zephir_get_called_class(_0$$3 TSRMLS_CC);
-		zephir_array_update_string(&source, Z_STRVAL_P(alias), Z_STRLEN_P(alias), &_0$$3, PH_COPY);
+		zephir_array_update_zval(&source, alias, &_0$$3, PH_COPY);
 	} else {
 		ZEPHIR_INIT_NVAR(source);
 		zephir_get_called_class(source TSRMLS_CC);
@@ -226,7 +226,7 @@ PHP_METHOD(Soinc_Model_Model, createBuilder) {
 
 }
 
-PHP_METHOD(Soinc_Model_Model, getInstance) {
+PHP_METHOD(Soinc_Model, getInstance) {
 
 	zend_class_entry *_1;
 	zval *className = NULL, *_0 = NULL;
@@ -247,7 +247,7 @@ PHP_METHOD(Soinc_Model_Model, getInstance) {
 
 }
 
-PHP_METHOD(Soinc_Model_Model, beforeValidationOnCreate) {
+PHP_METHOD(Soinc_Model, beforeValidationOnCreate) {
 
 	zval _0, *_1 = NULL, *_2;
 	int ZEPHIR_LAST_CALL_STATUS;
@@ -256,7 +256,7 @@ PHP_METHOD(Soinc_Model_Model, beforeValidationOnCreate) {
 
 	ZEPHIR_SINIT_VAR(_0);
 	ZVAL_STRING(&_0, "Y-m-d H:i:s", 0);
-	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 33, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 37, &_0);
 	zephir_check_call_status();
 	zephir_update_property_this(this_ptr, SL("created"), _1 TSRMLS_CC);
 	_2 = zephir_fetch_nproperty_this(this_ptr, SL("created"), PH_NOISY_CC);
@@ -265,14 +265,14 @@ PHP_METHOD(Soinc_Model_Model, beforeValidationOnCreate) {
 
 }
 
-PHP_METHOD(Soinc_Model_Model, afterFetch) {
+PHP_METHOD(Soinc_Model, afterFetch) {
 
 	
 
 
 }
 
-PHP_METHOD(Soinc_Model_Model, beforeSave) {
+PHP_METHOD(Soinc_Model, beforeSave) {
 
 	zval _0, *_1 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
@@ -281,7 +281,7 @@ PHP_METHOD(Soinc_Model_Model, beforeSave) {
 
 	ZEPHIR_SINIT_VAR(_0);
 	ZVAL_STRING(&_0, "Y-m-d H:i:s", 0);
-	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 33, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "date", NULL, 37, &_0);
 	zephir_check_call_status();
 	zephir_update_property_this(this_ptr, SL("updated"), _1 TSRMLS_CC);
 	RETURN_MM_BOOL(1);

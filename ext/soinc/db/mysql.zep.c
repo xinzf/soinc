@@ -81,7 +81,7 @@ PHP_METHOD(Soinc_Db_Mysql, __construct) {
 	ZEPHIR_CALL_METHOD(&config, _4, "toarray", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(config);
-	ZEPHIR_CALL_FUNCTION(&_5, "reset", NULL, 15, config);
+	ZEPHIR_CALL_FUNCTION(&_5, "reset", NULL, 19, config);
 	ZEPHIR_UNREF(config);
 	zephir_check_call_status();
 	if (!(Z_TYPE_P(_5) == IS_ARRAY)) {
@@ -149,7 +149,7 @@ PHP_METHOD(Soinc_Db_Mysql, getConnection) {
 		}
 		_1$$3 = zephir_fetch_nproperty_this(this_ptr, SL("dbConfigs"), PH_NOISY_CC);
 		ZEPHIR_MAKE_REF(_1$$3);
-		ZEPHIR_CALL_FUNCTION(NULL, "shuffle", &_2, 16, _1$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "shuffle", &_2, 20, _1$$3);
 		ZEPHIR_UNREF(_1$$3);
 		zephir_check_call_status();
 
@@ -182,7 +182,7 @@ PHP_METHOD(Soinc_Db_Mysql, getConnection) {
 				zephir_array_fetch_string(&_12$$5, _11$$5, SL("username"), PH_NOISY | PH_READONLY, "soinc/db/mysql.zep", 50 TSRMLS_CC);
 				ZEPHIR_INIT_LNVAR(_13$$5);
 				ZEPHIR_CONCAT_SVSV(_13$$5, "PHP Fatal error:  Soinc::Db::MySQL::connect() failed to connect to MySQL. Detail: hostname is ", _9$$5, " the user is ", _12$$5);
-				ZEPHIR_CALL_FUNCTION(NULL, "error_log", &_14, 17, _13$$5);
+				ZEPHIR_CALL_FUNCTION(NULL, "error_log", &_14, 7, _13$$5);
 				zephir_check_call_status();
 				_15$$5 = zephir_fetch_nproperty_this(this_ptr, SL("dbConfigs"), PH_NOISY_CC);
 				zephir_array_unset_long(&_15$$5, 0, PH_SEPARATE);
@@ -201,7 +201,7 @@ PHP_METHOD(Soinc_Db_Mysql, getConnection) {
 
 }
 
-static zend_object_value zephir_init_properties_Soinc_Db_Mysql(zend_class_entry *class_type TSRMLS_DC) {
+zend_object_value zephir_init_properties_Soinc_Db_Mysql(zend_class_entry *class_type TSRMLS_DC) {
 
 		zval *_0, *_1$$3;
 
